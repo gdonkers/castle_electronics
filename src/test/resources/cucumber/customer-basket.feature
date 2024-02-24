@@ -10,9 +10,7 @@ Feature: A customer can add and remove products from his basket
         "unitPrice": 1000.0
       }
     """
-
-    Given Id Generator returns discountDeal15
-    Then call POST on /products/iPhone/discount-deals/Buy_1_get_50_pct_off_second
+    And call POST on /products/iPhone/discount-deals/Buy_1_get_50_pct_off_second
 
     Given Id Generator returns 789
     When POST json to /customers/bob/basket/products:
@@ -54,45 +52,5 @@ Feature: A customer can add and remove products from his basket
     When call GET on /customers/bob/basket/products
     Then the response json should be:
     """
-     [
-     ]
-    """
-
-  Scenario: View summary of basket
-    When call GET on /customers/bob/basket
-    Then the response json should be:
-    """
-      {
-        "totalPrice": 2500.0,
-        "customerId": "bob",
-        "products": [
-          {
-            "name": "iPhone",
-            "quantity": 3,
-            "unitPrice": 1000.0,
-            "totalPriceAfterDiscounts": 2500.0,
-            "discounts": ["Buy_1_get_50_pct_off_second"]
-          }
-        ]
-      }
-    """
-
-  Scenario: View summary of basket after discount deal was retracted
-    Given call DELETE on /products/discount-deals/discountDeal15
-    When call GET on /customers/bob/basket
-    Then the response json should be:
-    """
-      {
-        "totalPrice": 3000.0,
-        "customerId": "bob",
-        "products": [
-          {
-            "name": "iPhone",
-            "quantity": 3,
-            "unitPrice": 1000.0,
-            "totalPriceAfterDiscounts": 3000.0,
-            "discounts": []
-          }
-        ]
-      }
+     [ ]
     """

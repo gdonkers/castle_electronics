@@ -5,7 +5,6 @@ create table products (
 );
 
 create table discount_deals (
-    id VARCHAR(256) PRIMARY KEY,
     product_id VARCHAR(256) NOT NULL,
     deal_type VARCHAR(256) NOT NULL
 );

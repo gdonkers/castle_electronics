@@ -33,6 +33,4 @@ To see the API docs with Swagger: http://localhost:8080/swagger-ui/index.html
 ## Release Notes
 - There is no authentication or authorisation support. So admin and customer APIs are open to all.
 - There is no persistent storage. The server runs on in-memory H2 so all state is lost on restart
-- Duplicate deals can be added still
-- No guard against existing products in baskets or with deals when deleting products 
-- Customer id will need come from somewhere else - the system does not generate one
+- Customer id will need to come from somewhere else - this service will not generate one

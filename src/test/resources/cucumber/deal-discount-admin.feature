@@ -11,35 +11,36 @@ Feature: An administrator can manage discount deals on products
       }
     """
     Then the response status should be 200
-    And Id Generator returns 456
-
-  Scenario: Add a deal discount
-    Then call POST on /products/123/discount-deals/Buy_1_get_50_pct_off_second
+    When call POST on /products/123/discount-deals/Buy_1_get_50_pct_off_second
     Then the response status should be 200
-    Then the response json should be:
+    And the response json should be:
     """
       {
-        "id": "456",
         "productId": "123",
         "dealType": "Buy_1_get_50_pct_off_second"
       }
     """
+    Then the response status should be 200
+
+  Scenario: Add and get a deal discount
     When call GET on /products/123/discount-deals
     Then the response status should be 200
     Then the response json should be:
     """
      [
         {
-          "id": "456",
           "productId": "123",
           "dealType": "Buy_1_get_50_pct_off_second"
         }
      ]
     """
 
+  Scenario: Try adding a deal discount to a non-existing product should fail
+    When call POST on /products/456/discount-deals/Buy_1_get_50_pct_off_second
+    Then the response status should be 500
+
   Scenario: Remove an existing deal
-    Then call POST on /products/123/discount-deals/Buy_1_get_50_pct_off_second
-    When call DELETE on /products/discount-deals/456
+    When call DELETE on /products/123/discount-deals/Buy_1_get_50_pct_off_second
     Then the response status should be 200
     When call GET on /products/123/discount-deals
     Then the response json should be:

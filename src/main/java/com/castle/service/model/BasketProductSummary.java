@@ -14,7 +14,7 @@ import java.util.List;
 public class BasketProductSummary {
     private String name;
     private int quantity;
-    private Double unitPrice;
+    private Double originalUnitPrice;
     private Double totalPriceAfterDiscounts;
     private List<DiscountDealType> discounts;
 }

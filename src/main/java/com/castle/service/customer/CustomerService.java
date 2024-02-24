@@ -47,7 +47,7 @@ public class CustomerService {
         return BasketProductSummary
                 .builder()
                 .name(product.getName())
-                .unitPrice(product.getUnitPrice())
+                .originalUnitPrice(product.getUnitPrice())
                 .totalPriceAfterDiscounts(priceAfterDiscount)
                 .quantity(basketProduct.getQuantity())
                 .discounts(discounts)
@@ -57,7 +57,7 @@ public class CustomerService {
     private Product lookupProductWithId(String productId) {
         return productRepo
                 .findById(productId)
-                .orElseThrow(() -> new IllegalStateException("This product has been discontinued"));
+                .orElseThrow(() -> new IllegalArgumentException("This product has been discontinued"));
     }
 
     @VisibleForTesting

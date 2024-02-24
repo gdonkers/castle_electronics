@@ -36,7 +36,8 @@ public class CustomerController {
                                 @RequestBody BasketProduct basketProduct) {
 
         String basketCustomerId = basketProduct.getCustomerId();
-        checkArgument(Objects.equals(basketCustomerId, customerId), format("customerId in basket (%s) is not the same as that in path (%s)", basketCustomerId, customerId));
+        String idAssertFailure = format("customerId in basket (%s) is not the same as that in path (%s)", basketCustomerId, customerId);
+        checkArgument(Objects.equals(basketCustomerId, customerId), idAssertFailure);
 
         return service.createProductForCustomerId(basketProduct);
     }
